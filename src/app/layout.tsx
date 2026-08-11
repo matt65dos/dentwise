@@ -21,12 +21,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
-		<ClerkProvider>
+		<ClerkProvider
+			appearance={{
+				variables: {
+					colorPrimary: "#e78a53",
+					colorBackground: "#f3f4f6",
+					// colorText: "#111827",
+					colorInputForeground: "#6b7280",
+					// colorInputBackground: "#f3f4f6",
+				},
+			}}
+		>
 			<html
 				lang="en"
 				className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
 			>
-			<body className="min-h-full flex flex-col">{children}</body>
+			<body className="min-h-full flex flex-col dark">{children}</body>
 			</html>
 		</ClerkProvider>
 	);
