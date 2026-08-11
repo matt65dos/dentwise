@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 3 db users, appointments, doctors
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relationships
+  appointments Appointment[]
+
+  @@map("users")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Doctor {
+  id         String   @id @default(cuid())
+  name       String
+  email      String   @unique
+  phone      String
+  speciality String
+  bio        String?
+  imageUrl   String
+  gender     Gender
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // relationships
+  appointments Appointment[]
+
+  @@map("doctors")
+}
+
+enum AppointmentStatus {
+  CONFIRMED
+  COMPLETED
+}
+
+// Appointments mają relację między User a Doctor
+// np john => booked an appointment for doctor jane
+
+model Appointment {
+  id        String            @id @default(cuid())
+  date      DateTime
+  time      String // store time as sting i.e 14:30
+  duration  Int               @default(30) // duration in minutes
+  status    AppointmentStatus @default(CONFIRMED)
+  notes     String?
+  reson     String? // reason for appointment - teeth cleaning? emergency visit?
+  createdAt DateTime
+  updatedAt DateTime          @updatedAt
+
+  // foreign keys -- DO RELACJI między User a Doctor
+  userId   String
+  doctorId String
+
+  // relationships
+  // user o typie User
+  // pole userId w Appointments table odpowiada polu id w tabeli User
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // kolejna relacja między Appointment a Doctor
+  doctor Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  // teraz trzeba dodać pole appointments do User i Doctor
+
+  @@map("appointments")
+}
