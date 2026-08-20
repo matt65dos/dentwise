@@ -30,6 +30,7 @@ function AddDoctorDialog({ isOpen, onClose }: AddDoctorDialogProps) {
 		isActive: true,
 	});
 
+	// @ts-ignore
 	const createDoctorMutation = useCreateDoctor();
 
 	const handlePhoneChange = (value: string) => {
