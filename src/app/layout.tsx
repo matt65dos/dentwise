@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 
 import "./globals.css";
 import { UserSync } from "@/components/UserSync";
+import TanStackProvider from "@/components/providers/TanStackProvider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -22,26 +23,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
-		<ClerkProvider
-			appearance={{
-				variables: {
-					colorPrimary: "#e78a53",
-					colorBackground: "#f3f4f6",
-					// colorText: "#111827",
-					colorInputForeground: "#6b7280",
-					// colorInputBackground: "#f3f4f6",
-				},
-			}}
-		>
-			<html
-				lang="en"
-				className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+		<TanStackProvider>
+			<ClerkProvider
+				appearance={{
+					variables: {
+						colorPrimary: "#e78a53",
+						colorBackground: "#f3f4f6",
+						// colorText: "#111827",
+						colorInputForeground: "#6b7280",
+						// colorInputBackground: "#f3f4f6",
+					},
+				}}
 			>
-			<body className="min-h-full flex flex-col dark">
-				<UserSync />
+				<html
+					lang="en"
+					className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+				>
+				<body className="min-h-full flex flex-col dark">
+				<UserSync/>
 				{children}
-			</body>
-			</html>
-		</ClerkProvider>
+				</body>
+				</html>
+			</ClerkProvider>
+		</TanStackProvider>
 	);
 }
