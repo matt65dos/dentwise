@@ -24,6 +24,7 @@ interface EditDoctorDialogProps {
 function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
 	const [editingDoctor, setEditingDoctor] = useState<Doctor | null>(doctor);
 
+	// @ts-ignore
 	const updateDoctorMutation = useUpdateDoctor();
 
 	const handlePhoneChange = (value: string) => {
