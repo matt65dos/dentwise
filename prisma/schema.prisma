@@ -69,7 +69,7 @@ model Appointment {
   duration  Int               @default(30) // duration in minutes
   status    AppointmentStatus @default(CONFIRMED)
   notes     String?
-  reson     String? // reason for appointment - teeth cleaning? emergency visit?
+  reason     String? // reason for appointment - teeth cleaning? emergency visit?
   createdAt DateTime
   updatedAt DateTime          @updatedAt
 

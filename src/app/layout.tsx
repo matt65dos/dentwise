@@ -5,6 +5,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import "./globals.css";
 import { UserSync } from "@/components/UserSync";
 import TanStackProvider from "@/components/providers/TanStackProvider";
+import { Toaster } from "@/components/ui/toast";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 				>
 				<body className="min-h-full flex flex-col dark">
 				<UserSync/>
+				<Toaster />
 				{children}
 				</body>
 				</html>
