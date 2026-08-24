@@ -41,7 +41,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 					className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
 				>
 				<body className="min-h-full flex flex-col dark">
-				<UserSync/>
+				{/* this is done in Home Page */}
+				{/*<UserSync/>*/}
 				<Toaster />
 				{children}
 				</body>

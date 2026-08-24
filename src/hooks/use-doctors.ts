@@ -32,6 +32,9 @@ export const useUpdateDoctor = (doctor: Doctor) => {
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ['getDoctors'],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ['getAvailableDoctors'],
 			})
 		},
 		onError: () => console.log("Failed to update doctor:", error),
